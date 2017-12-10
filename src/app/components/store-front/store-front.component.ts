@@ -16,7 +16,7 @@ export class StoreFrontComponent implements OnInit {
   public products: Observable<Product[]>;
 
   public constructor(private productsService: ProductsDataService,
-                     private shoppingCartService: ShoppingCartService) {
+    private shoppingCartService: ShoppingCartService) {
   }
 
   public addProductToCart(product: Product): void {
@@ -30,11 +30,11 @@ export class StoreFrontComponent implements OnInit {
   public productInCart(product: Product): boolean {
     return Observable.create((obs: Observer<boolean>) => {
       const sub = this.shoppingCartService
-                      .get()
-                      .subscribe((cart) => {
-                        obs.next(cart.items.some((i) => i.productId === product.id));
-                        obs.complete();
-                      });
+        .get()
+        .subscribe((cart) => {
+          obs.next(cart.items.some((i) => i.productId === product._id));
+          obs.complete();
+        });
       sub.unsubscribe();
     });
   }

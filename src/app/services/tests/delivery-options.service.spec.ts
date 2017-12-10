@@ -1,7 +1,7 @@
 import { inject, TestBed } from "@angular/core/testing";
-import { HttpModule, Response, ResponseOptions, XHRBackend } from "@angular/http";
-import { MockBackend } from "@angular/http/testing";
-import { MockConnection } from "@angular/http/testing";
+import { HttpModule, Response, ResponseOptions, XHRBackend } from "@angular/common/http";
+import { MockBackend } from "@angular/common/http/testing";
+import { MockConnection } from "@angular/common/http/testing";
 import { DeliveryOption } from "app/models/delivery-option.model";
 import { DeliveryOptionsDataService } from "app/services/delivery-options.service";
 

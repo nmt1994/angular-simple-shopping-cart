@@ -1,7 +1,7 @@
 import "rxjs/add/operator/share";
 import { Observable } from "rxjs/Observable";
 
-export abstract class CachcingServiceBase {
+export abstract class CachingServiceBase {
   protected cache<T>(getter: () => Observable<T>,
                      setter: (val: Observable<T>) => void,
                      retreive: () => Observable<T>): Observable<T> {

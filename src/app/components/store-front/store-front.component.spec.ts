@@ -1,5 +1,5 @@
 import { async, inject, TestBed } from "@angular/core/testing";
-import { HttpModule } from "@angular/http";
+import { HttpModule } from "@angular/common/http";
 import { CartItem } from "app/models/cart-item.model";
 import { Product } from "app/models/product.model";
 import { ShoppingCart } from "app/models/shopping-cart.model";
@@ -15,13 +15,13 @@ import { StoreFrontComponent } from "./store-front.component";
 
 const PRODUCT_1 = new Product();
 PRODUCT_1.name = "Product 1";
-PRODUCT_1.id = "1";
+PRODUCT_1._id = "1";
 PRODUCT_1.price = 1;
 PRODUCT_1.description = "desc1";
 
 const PRODUCT_2 = new Product();
 PRODUCT_2.name = "Product 2";
-PRODUCT_2.id = "2";
+PRODUCT_2._id = "2";
 PRODUCT_2.price = 2;
 PRODUCT_2.description = "desc2";
 
@@ -145,7 +145,7 @@ describe("StoreFrontComponent", () => {
      async(inject([ShoppingCartService], (service: MockShoppingCartService) => {
     const newCart = new ShoppingCart();
     const cartItem = new CartItem();
-    cartItem.productId = PRODUCT_1.id;
+    cartItem.productId = PRODUCT_1._id;
     cartItem.quantity = 1;
     newCart.grossTotal = 1.5;
     newCart.items = [cartItem];

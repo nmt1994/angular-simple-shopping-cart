@@ -1,6 +1,6 @@
 import { inject, TestBed } from "@angular/core/testing";
-import { HttpModule, XHRBackend } from "@angular/http";
-import { MockBackend } from "@angular/http/testing";
+import { HttpModule, XHRBackend } from "@angular/common/http";
+import { MockBackend } from "@angular/common/http/testing";
 import { DeliveryOption } from "app/models/delivery-option.model";
 import { Product } from "app/models/product.model";
 import { ShoppingCart } from "app/models/shopping-cart.model";
@@ -14,12 +14,12 @@ import { LocalStorageServie, StorageService } from "../storage.service";
 
 const PRODUCT_1 = new Product();
 PRODUCT_1.name = "Product 1";
-PRODUCT_1.id = "1";
+PRODUCT_1._id = "1";
 PRODUCT_1.price = 1;
 
 const PRODUCT_2 = new Product();
 PRODUCT_2.name = "Product 2";
-PRODUCT_2.id = "2";
+PRODUCT_2._id = "2";
 PRODUCT_2.price = 2;
 
 const DELIVERY_OPT_1 = new DeliveryOption();
@@ -161,7 +161,7 @@ describe("ShoppingCartService", () => {
       service.get()
             .subscribe((cart) => {
               expect(cart.items.length).toEqual(1);
-              expect(cart.items[0].productId).toEqual(PRODUCT_1.id);
+              expect(cart.items[0].productId).toEqual(PRODUCT_1._id);
             });
     }));
 

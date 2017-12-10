@@ -4,7 +4,9 @@ import { RouterModule } from "@angular/router";
 import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { OrderConfirmationComponent } from "./components/order-confirmation/order-confirmation.component";
 import { StoreFrontComponent } from "./components/store-front/store-front.component";
-import { PopulatedCartRouteGuard } from "./route-gaurds/populated-cart.route-gaurd";
+import { PopulatedCartRouteGuard } from "./route-guards/populated-cart.route-guard";
+
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
     exports: [RouterModule],
@@ -16,6 +18,11 @@ import { PopulatedCartRouteGuard } from "./route-gaurds/populated-cart.route-gau
                 path: "checkout"
             },
             {
+                // canActivate: [PopulatedCartRouteGuard],
+                component: LoginComponent,
+                path: "login"
+            },
+            {
                 canActivate: [PopulatedCartRouteGuard],
                 component: OrderConfirmationComponent,
                 path: "confirmed"
@@ -23,7 +30,7 @@ import { PopulatedCartRouteGuard } from "./route-gaurds/populated-cart.route-gau
             {
                 component: StoreFrontComponent,
                 path: "**"
-            }])
+            }], { useHash: true })
     ]
 })
 export class AppRoutingModule { }

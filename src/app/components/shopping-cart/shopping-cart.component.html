@@ -11,18 +11,21 @@
   <div class="small-12 columns">
     <h5>
       Sub Total ({{itemCount}} items):
-      <span class="text--red text--bold js-cart-total">{{(cart | async).grossTotal | currency:'GBP':true}}</span>
+      <span class="text--red text--bold js-cart-total">{{(cart | async).grossTotal | currency:'EUR':true}}</span>
     </h5>
   </div>
 </div>
 <br/>
-<div class="row">
+<div class="row" *ngIf="loginSvc.getUserInfo() != null; else notLoggedIn">
   <div class="small-12 columns">
-    <a class="success button large expanded"
-       [attr.disabled]="itemCount === 0 ? true : null"
-       routerLink="/checkout">Proceed To Checkout</a>
+    <a class="success button large expanded" [attr.disabled]="itemCount === 0 ? true : null" routerLink="/checkout">Proceed To Checkout </a>
   </div>
 </div>
+<ng-template #notLoggedIn>
+  <div class="small-12 columns">
+    <a class="success button large expanded" [attr.disabled]="true">Proceed To Checkout ( Must be logged in)</a>
+  </div>
+</ng-template>
 <div class="row">
   <div class="small-12 columns text-center">
     or
@@ -30,10 +33,7 @@
 </div>
 <div class="row">
   <div class="small-12 columns">
-    <button type="button"
-            class="secondary button small expanded js-btn-empty-cart"
-            (click)="emptyCart()"
-            [attr.disabled]="itemCount === 0 ? true : null">
+    <button type="button" class="secondary button small expanded js-btn-empty-cart" (click)="emptyCart()" [attr.disabled]="itemCount === 0 ? true : null">
       Empty shopping basket
     </button>
   </div>

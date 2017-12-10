@@ -41,10 +41,10 @@ export class ShoppingCartService {
 
   public addItem(product: Product, quantity: number): void {
     const cart = this.retrieve();
-    let item = cart.items.find((p) => p.productId === product.id);
+    let item = cart.items.find((p) => p.productId === product._id);
     if (item === undefined) {
       item = new CartItem();
-      item.productId = product.id;
+      item.productId = product._id;
       cart.items.push(item);
     }
 
@@ -75,7 +75,7 @@ export class ShoppingCartService {
 
   private calculateCart(cart: ShoppingCart): void {
     cart.itemsTotal = cart.items
-                          .map((item) => item.quantity * this.products.find((p) => p.id === item.productId).price)
+                          .map((item) => item.quantity * this.products.find((p) => p._id === item.productId).price)
                           .reduce((previous, current) => previous + current, 0);
     cart.deliveryTotal = cart.deliveryOptionId ?
                           this.deliveryOptions.find((x) => x.id === cart.deliveryOptionId).price :

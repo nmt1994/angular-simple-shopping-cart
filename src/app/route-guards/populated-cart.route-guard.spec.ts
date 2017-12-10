@@ -1,5 +1,5 @@
 import { inject, TestBed } from "@angular/core/testing";
-import { MockBackend } from "@angular/http/testing";
+import { MockBackend } from "@angular/common/http/testing";
 import { Router, RouterModule } from "@angular/router";
 import { CartItem } from "app/models/cart-item.model";
 import { ShoppingCart } from "app/models/shopping-cart.model";
@@ -11,7 +11,7 @@ import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
 import * as sinon from "sinon";
 import { SinonSpy } from "sinon";
-import { PopulatedCartRouteGuard } from "./populated-cart.route-gaurd";
+import { PopulatedCartRouteGuard } from "./populated-cart.route-guard";
 
 class MockShoppingCartService {
   public unsubscriveCalled: boolean = false;
@@ -53,29 +53,29 @@ describe("PopulatedCartRouteGuard", () => {
     });
   });
 
-  it("should be injectable", inject([PopulatedCartRouteGuard], (routeGaurd: PopulatedCartRouteGuard) => {
-    expect(routeGaurd).toBeTruthy();
+  it("should be injectable", inject([PopulatedCartRouteGuard], (routeGuard: PopulatedCartRouteGuard) => {
+    expect(routeGuard).toBeTruthy();
   }));
 
   describe("canActivate", () => {
     it("should return true if there are items in the cart",
       inject([Router, ShoppingCartService, PopulatedCartRouteGuard], (router: Router,
         shoppingCartService: MockShoppingCartService,
-        gaurd: PopulatedCartRouteGuard) => {
+        guard: PopulatedCartRouteGuard) => {
         const newCart = new ShoppingCart();
         const cartItem = new CartItem();
         cartItem.quantity = 1;
         newCart.items = [cartItem];
         shoppingCartService.dispatchCart(newCart);
 
-        gaurd.canActivate()
+        guard.canActivate()
           .subscribe((result) => expect(result).toBeTruthy());
       }));
 
     it("should return false and redirect to '/' if there are no items in the cart",
-      inject([Router, PopulatedCartRouteGuard], (router: Router, gaurd: PopulatedCartRouteGuard) => {
-        gaurd.canActivate()
-             .subscribe((result) => expect(result).toBeFalsy());
+      inject([Router, PopulatedCartRouteGuard], (router: Router, guard: PopulatedCartRouteGuard) => {
+        guard.canActivate()
+          .subscribe((result) => expect(result).toBeFalsy());
 
         sinon.assert.calledOnce(router.navigate as SinonSpy);
         sinon.assert.calledWithExactly(router.navigate as SinonSpy, ["/"]);

@@ -1,0 +1,45 @@
+<div class="top-bar">
+    <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">
+                <h4>
+                    <i class="material-icons">local_drink</i>
+                    A minimal web shop
+                </h4>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="getUserInfo() != null; else notLoggedIn" class="top-bar-right">
+        <ul class="menu">
+            <li>
+                Hello {{ getUserInfo()?.username }}
+            </li>
+            <li>
+                <a href="#/Order"> Your Orders </a>
+            </li>
+            <li  *ngIf="getUserInfo().type != 3">
+                <a href="#/Inventory"> Inventory Manager </a>
+            </li>
+            <li>
+                <button type="button" (click)="onLogoutClick()" class="button">Logout</button>
+            </li>
+        </ul>
+    </div>
+    <ng-template #notLoggedIn>
+        <div class="top-bar-right">
+            <ul class="menu">
+                <li>
+                    Hello stranger
+                </li>
+                <li>
+                    <a class="button" routerLink="/login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </ng-template>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+        <router-outlet></router-outlet>
+    </div>
+</div>
