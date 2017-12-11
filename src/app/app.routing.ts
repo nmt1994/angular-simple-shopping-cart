@@ -7,6 +7,8 @@ import { StoreFrontComponent } from "./components/store-front/store-front.compon
 import { PopulatedCartRouteGuard } from "./route-guards/populated-cart.route-guard";
 
 import { LoginComponent } from './components/login/login.component';
+import { OrderListComponent } from "app/components/order-list/order-list.component";
+import { InventoryManagerComponent } from "app/components/inventory-manager/inventory-manager.component";
 
 @NgModule({
     exports: [RouterModule],
@@ -26,6 +28,14 @@ import { LoginComponent } from './components/login/login.component';
                 canActivate: [PopulatedCartRouteGuard],
                 component: OrderConfirmationComponent,
                 path: "confirmed"
+            },
+            {
+                component: OrderListComponent,
+                path: 'Order'
+            },
+            {
+                component: InventoryManagerComponent,
+                path: 'Inventory'
             },
             {
                 component: StoreFrontComponent,

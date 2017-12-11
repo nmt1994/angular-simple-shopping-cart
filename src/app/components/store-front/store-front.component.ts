@@ -29,10 +29,11 @@ export class StoreFrontComponent implements OnInit {
 
   public productInCart(product: Product): boolean {
     return Observable.create((obs: Observer<boolean>) => {
-      const sub = this.shoppingCartService
-        .get()
+      const sub = this.shoppingCartService.get()
         .subscribe((cart) => {
-          obs.next(cart.items.some((i) => i.productId === product._id));
+          const curItem = cart.items.find((i) => i.productId === product._id);
+          const result = curItem != null ? curItem.quantity === product.quantity : false;
+          obs.next(result);
           obs.complete();
         });
       sub.unsubscribe();

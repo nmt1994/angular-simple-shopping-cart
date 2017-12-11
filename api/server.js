@@ -21,6 +21,9 @@ app.use('/api', bodyParser.json());
 // Product
 app.get('/api/product', productController.index);
 app.post('/dev/product', productController.preCreate)
+app.post('/api/product/:productId', productController.updateQuantity);
+app.delete('/api/product/:productId', productController.removeProduct)
+app.post('/api/product/', productController.createProduct);
 
 // User
 app.post('/api/user/login', userController.login);
@@ -30,6 +33,7 @@ app.post('/dev/user/2', userController.preCreateCustomer);
 app.post('/dev/user/3', userController.preCreateEmployee);
 
 // Order
+app.get('/api/order/:userId', orderController.getOrderById);
 app.post('/api/order', orderController.createOrder);
 
 app.get('*', function (req, res) {

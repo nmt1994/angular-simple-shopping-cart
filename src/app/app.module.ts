@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from "@angular/platform-browser";
@@ -18,6 +18,9 @@ import { ShoppingCartService } from "./services/shopping-cart.service";
 import { LocalStorageServie, StorageService } from "./services/storage.service";
 import { LoginService } from "app/services/login.service";
 import { LoginComponent } from "app/components/login/login.component";
+import { OrderListComponent } from "app/components/order-list/order-list.component";
+import { OrderListService } from "app/services/order-list.service";
+import { InventoryManagerComponent, InventoryItem } from "app/components/inventory-manager/inventory-manager.component";
 
 
 @NgModule({
@@ -28,11 +31,12 @@ import { LoginComponent } from "app/components/login/login.component";
     StoreFrontComponent,
     CheckoutComponent,
     OrderConfirmationComponent,
-    LoginComponent
+    LoginComponent, OrderListComponent,
+    InventoryManagerComponent, InventoryItem
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     AppRoutingModule
@@ -43,7 +47,7 @@ import { LoginComponent } from "app/components/login/login.component";
     PopulatedCartRouteGuard,
     LocalStorageServie,
     { provide: StorageService, useClass: LocalStorageServie },
-    LoginService,
+    LoginService, OrderListService,
     {
       deps: [StorageService, ProductsDataService, DeliveryOptionsDataService],
       provide: ShoppingCartService,

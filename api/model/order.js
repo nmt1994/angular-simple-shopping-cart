@@ -11,6 +11,9 @@ const orderSchema = db.Schema({
     items: [],
     total: {
         type: db.SchemaTypes.Number
+    },
+    date: {
+        type: db.SchemaTypes.Date
     }
 });
 

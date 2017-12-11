@@ -96,7 +96,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   public placeOrder(cart: any): void {
     const body = {
-      userId: this.loginSvc.getUserInfo()._id
+      userId: this.loginSvc.getUserInfo()._id,
       items: cart.items,
       total: cart.grossTotal
     }

@@ -1,5 +1,5 @@
 const db = require('mongoose');
-const url = 'mongodb://localhost:27017/hello';
+const url = 'mongodb://47.91.95.237:27017/hello';
 
 db.Promise = require('bluebird');
 

@@ -1,0 +1,19 @@
+<div *ngIf="itemData != null">
+    <div class="row">
+        <form [formGroup]="formInstance">
+            <div class="medium-12 columns">
+                <h4>
+                    <span class="text--bold js-product-name">{{itemData.name}}</span>
+                    <small class="product_price js-product-price">{{itemData.price | currency:'EUR':true}}</small>
+                    <button *ngIf="isAdmin" type="button" class="button danger" (click)="removeProduct(itemData)">Remove</button>
+                </h4>
+                <p class="js-product-desc">{{itemData.description}}</p>
+                <p>
+                    <label> Quantity </label>
+                    <input type="number" min="0" placeholder="Quantity here" formControlName="quantity" />
+                    <button type="button" *ngIf="formInstance?.dirty" class="button success large js-btn-add" (click)="saveProduct(itemData)">Save new quantity</button>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

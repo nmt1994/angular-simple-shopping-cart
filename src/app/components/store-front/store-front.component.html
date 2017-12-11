@@ -14,9 +14,9 @@
             </h4>
             <p class="js-product-desc">{{product.description}}</p>
             <p>
-              <button type="button" *ngIf="product.quantity == 0" class="button danger large js-btn-add"> Out of stock!
+              <button type="button" *ngIf="product.quantity == 0 || (productInCart(product) | async)" class="button danger large js-btn-add"> Out of stock!
               </button>
-              <button type="button" *ngIf="product.quantity > 0" class="button success large js-btn-add" (click)="addProductToCart(product, 1)">Add To Cart</button>
+              <button type="button" *ngIf="product.quantity > 0 && !(productInCart(product) | async)" class="button success large js-btn-add" (click)="addProductToCart(product, 1)">Add To Cart</button>
             </p>
           </div>
         </div>

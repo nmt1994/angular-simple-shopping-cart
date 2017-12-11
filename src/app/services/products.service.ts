@@ -18,4 +18,19 @@ export class ProductsDataService extends CachingServiceBase {
   public all(): Observable<Product[]> {
     return this.http.get<Product[]>("api/product")
   }
+
+  public saveProduct(productId: any, quantity: number): Observable<any> {
+    const requestBody = {
+      quantity: quantity
+    }
+    return this.http.post(`api/product/${productId}`, requestBody);
+  }
+
+  public createProduct(formValue: any): Observable<any> {
+    return this.http.post('api/product', formValue);
+  }
+
+  public removeProduct(productId: any): Observable<any> {
+    return this.http.delete(`api/product/${productId}`);
+  }
 }
